@@ -1,0 +1,38 @@
+<network>
+  <name>vm</name>
+  <uuid>be64b47b-354c-439f-a8d3-e888b936dd2b</uuid>
+  <forward mode="nat">
+    <nat>
+      <port start="1024" end="65535"/>
+    </nat>
+  </forward>
+  <bridge name="vmbr" stp="on" delay="0"/>
+  <mac address="52:54:00:f9:3a:a1"/>
+  <domain name="vm"/>
+  <ip address="192.168.100.1" netmask="255.255.255.0">
+    <dhcp>
+      <range start="192.168.100.128" end="192.168.100.254"/>
+      <host mac="52:54:11:ab:39:8f" name="guest0" ip="192.168.100.100"/>
+      <host mac="52:54:11:66:d3:c4" name="guest1" ip="192.168.100.101"/>
+      <host mac="52:54:11:dd:78:91" name="guest2" ip="192.168.100.102"/>
+      <host mac="52:54:11:54:4d:e6" name="guest3" ip="192.168.100.103"/>
+      <host mac="52:54:11:c0:ee:be" name="guest4" ip="192.168.100.104"/>
+      <host mac="52:54:11:c5:df:73" name="guest5" ip="192.168.100.105"/>
+      <host mac="52:54:11:1e:a8:fc" name="guest6" ip="192.168.100.106"/>
+      <host mac="52:54:11:f8:20:2a" name="guest7" ip="192.168.100.107"/>
+      <host mac="52:54:11:52:56:34" name="guest8" ip="192.168.100.108"/>
+      <host mac="52:54:11:57:04:2f" name="guest9" ip="192.168.100.109"/>
+      <host mac="52:54:11:19:a3:7e" name="guest10" ip="192.168.100.110"/>
+      <host mac="52:54:11:c5:81:58" name="guest11" ip="192.168.100.111"/>
+      <host mac="52:54:11:f4:ac:08" name="guest12" ip="192.168.100.112"/>
+      <host mac="52:54:11:5d:f6:b2" name="guest13" ip="192.168.100.113"/>
+      <host mac="52:54:11:75:dd:c0" name="guest14" ip="192.168.100.114"/>
+      <host mac="52:54:11:e5:10:be" name="guest15" ip="192.168.100.115"/>
+      <host mac="52:54:11:d3:b1:41" name="guest16" ip="192.168.100.116"/>
+      <host mac="52:54:11:37:06:e9" name="guest17" ip="192.168.100.117"/>
+      <host mac="52:54:11:a6:d0:f4" name="guest18" ip="192.168.100.118"/>
+      <host mac="52:54:11:42:90:e7" name="guest19" ip="192.168.100.119"/>
+      <host mac="52:54:11:11:64:94" name="test0" ip="192.168.100.254"/>
+    </dhcp>
+  </ip>
+</network>

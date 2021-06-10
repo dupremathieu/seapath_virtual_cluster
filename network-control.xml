@@ -1,0 +1,21 @@
+<network>
+  <name>control</name>
+  <uuid>61941020-c4bd-402a-b817-9439350ecfa1</uuid>
+  <bridge name='virbr2' stp='on' delay='0'/>
+  <mac address='52:54:00:8c:37:96'/>
+  <domain name='control'/>
+  <ip address='192.168.101.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.101.128' end='192.168.101.254'/>
+       <host mac='52:54:00:3f:e9:14' name='h1' ip='192.168.101.2'/>
+      <host mac='52:54:00:c1:97:56' name='h2' ip='192.168.101.3'/>
+      <host mac='52:54:00:f9:e8:c8' name='obs' ip='192.168.101.4'/>
+    </dhcp>
+</ip>
+  <forward mode="nat">
+    <nat>
+      <port start="1024" end="65535"/>
+    </nat>
+  </forward>
+</network>
+

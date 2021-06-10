@@ -1,0 +1,94 @@
+---
+all:
+    children:
+        cluster_machines:
+            children:
+                hypervisors:
+                    hosts:
+                        h1:
+                            ansible_host: 192.168.101.2
+                            network_interface: enp1s0
+                            ip_addr: "{{ ansible_host }}"
+                            ovs_bridges:
+                                - name: ovsbr0
+                                  type: regular
+                                  interface: "enp3s0"
+                            custom_network:
+                                00-ovsbr0:
+                                    - Match:
+                                          - Name: "ovsbr0"
+                                    - Network:
+                                          - Address: "10.0.24.2/24"
+                                10-cluster:
+                                    - Match:
+                                          - Name: "enp2s0"
+                                    - Network:
+                                          - Address: "192.168.102.2/24"
+                        h2:
+                            ansible_host: 192.168.101.3
+                            network_interface: enp1s0
+                            ip_addr: "{{ ansible_host }}"
+                            ovs_bridges:
+                                - name: ovsbr0
+                                  type: regular
+                                  interface: "enp3s0"
+                            custom_network:
+                                00-ovsbr0:
+                                    - Match:
+                                          - Name: "ovsbr0"
+                                    - Network:
+                                          - Address: "10.0.24.3/24"
+                                10-cluster:
+                                    - Match:
+                                          - Name: "enp2s0"
+                                    - Network:
+                                          - Address: "192.168.102.3/24"
+                    vars:
+                        dpdk_module: uio_pci_generic
+                        kernel_parameters_restart: true
+                        bootloader_config_file: /boot/syslinux.cfg
+
+                observers:
+                    hosts:
+                        obs:
+                            ansible_host: 192.168.101.4
+                            network_interface: enp1s0
+                            ip_addr: "{{ ansible_host }}"
+                            custom_network:
+                                10-cluster:
+                                    - Match:
+                                          - Name: "enp2s0"
+                                    - Network:
+                                          - Address: "192.168.102.4/24"
+        mons:
+            hosts:
+                h1:
+                h2:
+                obs:
+        osds:
+            hosts:
+                h1:
+                h2:
+            vars:
+                ceph_osd_disk: /dev/vdb
+        clients:
+            hosts:
+                h1:
+                h2:
+    vars:
+        ansible_connection: ssh
+        ansible_user: root
+        ansible_python_interpreter: /usr/bin/python3
+        dns_server: 192.168.101.1
+        gateway_addr: 192.168.101.1
+        apply_network_config: false
+        ntp_servers: 192.168.101.1
+        fallback_ntp_servers: 0.fr.pool.ntp.org 1.fr.pool.ntp.org
+        ceph_public_network: "192.168.101.0/24"
+        ceph_cluster_network: "192.168.102.0/24"
+        monitor_address: "{{ ansible_host }}"
+        vm_domaine: qemu
+        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+        image_directory: /home/mathieu/rte/demo/cluster-virtual
+        vm_config: ../templates/vm/votp_vm.xml.j2
+        guest_image: guest.qcow2

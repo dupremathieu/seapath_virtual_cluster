@@ -1,0 +1,8 @@
+<network>
+  <name>cluster</name>
+  <uuid>32dcfeb0-7e4b-47b1-a7df-b66830d77a1a</uuid>
+  <bridge name='virbr1' stp='on' delay='0'/>
+  <mac address='52:54:00:c4:21:b5'/>
+  <domain name='cluster'/>
+</network>
+
